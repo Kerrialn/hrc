@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %} {% block title %}Dashboard{% endblock %} {% block
+body %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    {% if vacancy %}
+    <div class="between mb-3">
+      <h3>
+        <span
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="matched vacancies"
+          class="badge rounded-pill bg-secondary"
+          ><i class="bi bi-briefcase-fill"></i>
+          {{ count }}
+        </span>
+      </h3>
+      <div
+        class="w-25"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="selected resume"
+      >
+        {{ form_row(pairForm.resume) }}
+      </div>
+    </div>
+    {% endif %} {% if vacancy %}
+    {{ form_start(pairForm) }}
+    <div class="card">
+      <div class="card-header bg-transparent between">
+        <div>
+          <h3 class="card-title m-0">{{ vacancy.position }}</h3>
+          <div>{{ vacancy.category.title }}</div>
+        </div>
+        <div>
+          <span
+            class="badge rounded-pill bg-dark"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="years experience"
+          >
+            <i class="bi bi-star-fill"></i> {{ vacancy.yearsExperience }}</span
+          >
+        </div>
+      </div>
+      <div class="card-body vacancyDisplay">
+        {{ vacancy.description }}
+      </div>
+      <div class="card-footer bg-transparent d-flex justify-content-between">
+        <div>{{ vacancy.createdAtForHumans }}</div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <div
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="not interested"
+      >
+        {{ form_row(pairForm.nextBtn) }}
+      </div>
+      <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="match">
+        {{ form_row(pairForm.likeBtn) }}
+      </div>
+    </div>
+
+    {{ form_end(pairForm) }}
+
+    {% elseif app.user.resumes|length == 0 %}
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center text-muted mb-3">
+          <h5>No resume found</h5>
+          create resume to be matched with vacancies
+        </div>
+        <div class="text-center">
+          <a
+            class="btn btn-outline-dark"
+            href="{{ path('user.resume.create') }}"
+          >
+            Create resume
+          </a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center text-muted mb-3">
+          <h5>No jobs found</h5>
+          No vacancies matched your resume, try again later.
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

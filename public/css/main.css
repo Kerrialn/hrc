@@ -1,0 +1,57 @@
+.pre{
+  white-space: pre-line;
+}
+
+.vacancyDisplay{
+  max-height: 50vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  white-space: pre-line;
+}
+
+.form-icon-btn{
+  font-size: 30px!important;
+  border-radius: 50%!important;
+  vertical-align: middle;
+  align-items: center;
+  display: flex;
+  display: flex;
+  margin: 0;
+  padding: 20px!important;
+  line-height: .9!important;
+}
+
+.green-light{
+  border: 1px solid #75b798!important;
+  color:#75b798!important;
+ }
+ .red-light{
+  border: 1px solid #f1aeb5!important;
+  color: #ea868f!important;
+ }
+
+
+.green-light:hover{
+ background-color: #75b798!important;
+ color: #ffffff!important;
+ transition: all 0.5s ease;
+}
+.red-light:hover{
+ background-color: #ea868f!important;
+ color: #ffffff!important;
+ transition: all 0.5s ease;
+}
+
+.between{
+  display: flex!important;
+  justify-content: space-between!important;
+  align-items: center!important;
+}
+
+.mr-3{
+  margin-right: 10px!important;
+}
+
+.is-default-resume{
+  border-left: 5px solid green!important;
+}

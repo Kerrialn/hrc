@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} {% block title %}Create{% endblock %} {% block
+body %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-header bg-transparent">
+        <h5 class="m-0">Create resume</h5>
+      </div>
+      {{ form_start(resumeForm) }}
+      <div class="card-body">
+        {{ form_row(resumeForm.name) }}
+
+        <div class="d-flex justify-content-between">
+          <div>{{ form_row(resumeForm.category) }}</div>
+          <div>{{ form_row(resumeForm.position) }}</div>
+          <div>{{ form_row(resumeForm.yearsExperience) }}</div>
+        </div>
+
+        {{ form_row(resumeForm.statement) }}
+      </div>
+      <div class="card-footer bg-transparent">
+        <div class="text-end mt-3">
+          <button type="submit" class="btn btn-outline-dark">save</button>
+        </div>
+      </div>
+      {{ form_end(resumeForm) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

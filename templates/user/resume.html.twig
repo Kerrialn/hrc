@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %} {% block title %}Dashboard{% endblock %} {% block
+body %}
+
+<style>
+  section.divider {
+    border-bottom: 1px solid #cccccc;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <h1 class="m-0">{{ user.name }}</h1>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item px-0">
+        {{ user.email }}
+      </li>
+      <li class="list-group-item px-0">
+        {{ user.phoneNumber }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <section class="divider mb-3">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="m-0">{{ resume.position }}</h1>
+          <div>{{ resume.category.title }}</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="text-end">
+      <div class="btn-group mb-3" role="group" aria-label="Basic example">
+        <a
+          class="btn btn-outline-dark"
+          href="{{ path('user.resume.edit', { id: resume.id }) }}"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Edit"
+        >
+          <i class="bi bi-pen"></i>
+        </a>
+        <a
+          class="btn btn-outline-dark"
+          href="{{ path('user.resume.download', { id: resume.id }) }}"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Download"
+        >
+          <i class="bi bi-download"></i>
+        </a>
+      </div>
+    </div>
+
+    <section class="divider mb-3">
+      <h5 class="m-0">Statement</h5>
+      <div class="card-body px-0 pre">
+        {{ resume.statement }}
+      </div>
+    </section>
+
+    <section class="divider mb-3">
+      <h5>Experience</h5>
+      <ul class="list-group list-group-flush">
+        {% for experience in resume.experiences %}
+        <li class="list-group-item px-0">
+          <span class="fw-bold">{{ experience.title }} </span> |
+          {{ experience.company }}
+          {% if experience.isCurrent %}
+          <span
+            class="badge rounded-pill bg-success"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="current position"
+          >
+            <i class="bi bi-check"></i>
+          </span>
+          {% endif %}
+          <div>
+            {{ experience.getDuration }}
+          </div>
+        </li>
+        {% else %}
+        <li class="list-group-item">no experience found</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="mb-3">
+      <h5>Education</h5>
+      <ul class="list-group list-group-flush">
+        {% for qualification in resume.qualifications %}
+        <li class="list-group-item px-0">
+          <span class="fw-bold">{{ qualification.title }} </span> |
+          {{ qualification.issuer }} - {{ qualification.getFormatedCreateAt }}
+        </li>
+        {% else %}
+        <li class="list-group-item">no qualifications found</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <div class="d-flex justify-content-between">
+      <div></div>
+      <div><i class="bi bi-clock"></i> {{ resume.getCreateAtForHumans }}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

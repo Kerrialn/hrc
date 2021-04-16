@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %} {% block title %}Create{% endblock %} {% block
+body %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header fs-3 bg-transparent between">
+        <div>Create qualification</div>
+        <div>{{ resume.name }}</div>
+      </div>
+      {{ form_start(qualificationForm) }}
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>{{ form_row(qualificationForm.title) }}</div>
+          <div>{{ form_row(qualificationForm.issuer) }}</div>
+        </div>
+        {{ form_row(qualificationForm.completedAt) }}
+      </div>
+      <div class="card-footer bg-transparent text-end">
+        <button class="btn btn-outline-dark" type="submit">save</button>
+      </div>
+      {{ form_end(qualificationForm) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

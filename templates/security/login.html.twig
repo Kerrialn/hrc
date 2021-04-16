@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+        <div class="card">
+                <div class="card-header bg-transparent">Login</div>
+                <div class="card-body">
+                    <form method="post">
+                    <input type="email" placeholder="E-mail address" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" required autofocus>
+                    <input type="password" placeholder="password" name="password" id="inputPassword" class="form-control mb-3" required>
+                    <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+                    <button class="btn btn-lg btn-outline-dark w-100" type="submit">contiune</button>
+                    </form>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

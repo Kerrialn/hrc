@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %} {% block title %}Edit {% endblock %} {% block
+body %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-header fs-3 bg-transparent">Edit {{ resume.name }}</div>
+      {{ form_start(resumeForm) }}
+      <div class="card-body">
+        {{ form_row(resumeForm.name) }}
+        <div class="d-flex justify-content-between">
+          <div>{{ form_row(resumeForm.category) }}</div>
+          <div>{{ form_row(resumeForm.position) }}</div>
+          <div>{{ form_row(resumeForm.yearsExperience) }}</div>
+        </div>
+        {{ form_row(resumeForm.statement) }}
+      </div>
+      <div class="card-footer bg-transparent">
+        <div class="text-end mt-3">
+          <button type="submit" class="btn btn-outline-dark">save</button>
+        </div>
+      </div>
+      {{ form_end(resumeForm) }}
+    </div>
+
+    <ul class="list-group mb-3">
+      <li class="list-group-item between">
+        <div class="fs-4">Experience</div>
+        <a
+          class="btn btn-light"
+          href="{{ path('user.resume.add.experience', { id: resume.id }) }}"
+        >
+          <i class="bi bi-plus fs-4"></i>
+        </a>
+      </li>
+      {% for experience in resume.experiences %}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <h5 class="m-0">
+            {{ experience.title }}
+            {% if experience.isCurrent %}
+            <span
+              class="badge rounded-pill bg-success"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title="current position"
+            >
+              <i class="bi bi-check"></i>
+            </span>
+            {% endif %}
+          </h5>
+          <div>{{ experience.company }}</div>
+        </div>
+        <div>{{ experience.getDuration }}</div>
+      </li>
+      {% else %}
+      <li class="list-group-item text-center p-3">no experience found</li>
+      {% endfor %}
+    </ul>
+
+    <ul class="list-group mb-3">
+      <li class="list-group-item between">
+        <div class="fs-4">Qualifications</div>
+        <a
+          class="btn btn-light"
+          href="{{ path('user.resume.add.qualification', { id: resume.id }) }}"
+        >
+          <i class="bi bi-plus fs-4"></i>
+        </a>
+      </li>
+      {% for qualification in resume.qualifications %}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <h5 class="m-0">
+            {{ qualification.title }}
+          </h5>
+          <div>{{ qualification.issuer }}</div>
+        </div>
+        <div>{{ qualification.getFormatedCreateAt }}</div>
+      </li>
+      {% else %}
+      <li class="list-group-item text-center p-3">no qualifications found</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

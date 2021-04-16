@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %} {% block title %}Account{% endblock %} {% block
+body %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item between">
+          <div class="fs-4">Resumes</div>
+          <a
+            class="btn btn-light"
+            href="{{ path('user.resume.create') }}"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="create resume"
+          >
+            <i class="bi bi-plus fs-4"></i>
+          </a>
+        </li>
+        {% for resume in user.resumes %}
+        <li class="list-group-item between">
+          <div class="between">
+            <div>
+              <div class="fw-bold">
+                <a href="{{ path('user.resume.show', { id: resume.id }) }}">{{
+                  resume.name
+                }}</a>
+              </div>
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="last updated"
+                >{{ resume.getUpdatedAtForHumans }}</span
+              >
+            </div>
+          </div>
+          <div class="dropdown">
+            <i
+              class="btn btn-light bi bi-three-dots-vertical fs-4"
+              id="dropdown_{{ resume.id }}"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></i>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="dropdown_{{ resume.id }}"
+            >
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{{ path('user.resume.edit', { id: resume.id }) }}"
+                  >edit</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="{{ path('user.resume.update', { id: resume.id }) }}"
+                  >set as default</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="#">delete</a></li>
+            </ul>
+          </div>
+        </li>
+        {% else %}
+        <li class="list-group-item text-center p-3">no resumes found</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
